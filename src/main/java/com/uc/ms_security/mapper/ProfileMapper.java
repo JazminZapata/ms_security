@@ -24,6 +24,11 @@ public class ProfileMapper {
     }
 
     public ProfileResponseDTO toResponseDTO(Profile profile) {
+        if (profile == null) {// Si el usuario no tiene un perfil, entonces retornamos null. Esto es para
+                              // evitar errores de null pointer exception.
+            return null;
+        }
+
         return new ProfileResponseDTO(
                 profile.getId(),
                 profile.getPhone(),

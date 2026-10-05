@@ -45,4 +45,20 @@ public class User {
             nullable = false
     )
     private String password;
+
+    //Solo sabe que tiene pegado un perfil
+    @OneToOne(
+
+            //La clase usuario puede acceder al perfil porque en la entity profile creamos el atributo user y lo pusimos como @OneToOne
+            mappedBy = "user",
+            
+            //Si hago una eliminacion del usuario hago una eliminacion en cascada con el perfil.
+            cascade = CascadeType.ALL,
+            
+            orphanRemoval = true,
+            
+            //LAZY -> Opcional. Cuando pregunte por el usuario no siempre necesito el perfil. 
+            fetch = FetchType.LAZY
+    )
+    private Profile profile;
 }

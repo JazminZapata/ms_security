@@ -23,4 +23,11 @@ public class Profile {
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    // Conexion con otra tabla de la base de datos
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    // Obtenemos un usuario. Eso es una forma de decir que el perfil tiene un
+    // usuario.
+    private User user;
 }

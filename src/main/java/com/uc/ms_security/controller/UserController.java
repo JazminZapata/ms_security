@@ -2,6 +2,7 @@ package com.uc.ms_security.controller;
 
 import com.uc.ms_security.dto.user.CreateUserDTO;
 import com.uc.ms_security.dto.user.UpdateUserDTO;
+import com.uc.ms_security.dto.user.UserDetailResponseDTO;
 import com.uc.ms_security.dto.user.UserResponseDTO;
 import com.uc.ms_security.service.UserService;
 import jakarta.validation.Valid;
@@ -33,6 +34,11 @@ public class UserController {
         return userService.findById(id);
     }
 
+    @GetMapping("/{id}/detail")
+    public UserDetailResponseDTO findByIdAndProfile(@PathVariable Long id) {
+        return userService.findByIdWithProfile(id);
+    }
+
     @PutMapping("/{id}")
     public UserResponseDTO update(
             @PathVariable Long id,
@@ -46,5 +52,7 @@ public class UserController {
         userService.delete(id);
     }
 }
+
+
 
 
