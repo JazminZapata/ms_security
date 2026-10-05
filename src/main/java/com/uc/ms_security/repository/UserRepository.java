@@ -19,4 +19,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @EntityGraph(attributePaths = "profile")
     //Busque con el perfil JOIN interno del usuario con la entidad perfil. 
     Optional<User> findWithProfileById(Long id);
+
+    //Yo como usuario quiero ver todas mis sesiones - EntityGraph
+    // Consulta de sesiones
+    @EntityGraph(attributePaths = "sessions")
+    Optional<User> findWithSessionsById(Long id);
 }

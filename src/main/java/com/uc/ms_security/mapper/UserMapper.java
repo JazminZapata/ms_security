@@ -1,5 +1,7 @@
 package com.uc.ms_security.mapper;
 
+import com.uc.ms_security.dto.session.SessionResponseDTO;
+import com.uc.ms_security.dto.session.UserSessionsResponseDTO;
 import com.uc.ms_security.dto.user.CreateUserDTO;
 import com.uc.ms_security.dto.user.UpdateUserDTO;
 import com.uc.ms_security.dto.user.UserDetailResponseDTO;
@@ -15,6 +17,7 @@ import java.util.List;
 public class UserMapper {
 
     private final ProfileMapper profileMapper;
+    private final SessionMapper sessionMapper;
 
     public User toEntity(CreateUserDTO dto) {
         User user = new User();
@@ -50,6 +53,16 @@ public class UserMapper {
                 user.getEmail(),
                 //En esta linea es donde se hace la invocacion del perfil. por medio de la invocacion llama al repository y alli hace la consulta del perfil
                 profileMapper.toResponseDTO(user.getProfile())
+        );
+    }
+
+    public UserSessionsResponseDTO toSessionsResponseDTO(User user) {
+        return new UserSessionsResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                //Sobre este se ejecuta el join -> "Consulta o pide consultar a la BD"
+                sessionMapper.toResponseDTOList(user.getSessions())
         );
     }
 
